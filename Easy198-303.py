@@ -750,4 +750,94 @@ class Solution(object):
         for j in range(i, len(nums)):
             nums[j] = 0
         
+290. 单词模式
+给定一种 pattern(模式) 和一个字符串 str ，判断 str 是否遵循相同的模式。
+
+这里的遵循指完全匹配，例如， pattern 里的每个字母和字符串 str 中的每个非空单词之间存在着双向连接的对应模式。
+
+示例1:
+
+输入: pattern = "abba", str = "dog cat cat dog"
+输出: true
+
+示例 2:
+
+输入:pattern = "abba", str = "dog cat cat fish"
+输出: false
+
+示例 3:
+
+输入: pattern = "aaaa", str = "dog cat cat dog"
+输出: false
+
+示例 4:
+
+输入: pattern = "abba", str = "dog dog dog dog"
+输出: false
+
+class Solution(object):
+    def wordPattern(self, pattern, str):
+        """
+        :type pattern: str
+        :type str: str
+        :rtype: bool
+        """
+        str = str.split()
+        def helper(s):
+            d = {}
+            p = 0
+            for i in s:
+                if i not in d:
+                    d[i] = p
+                    p += 1
+            ans = ''
+            for j in s:
+                ans += '%s' % d[j]
+            return ans
+        return helper(pattern) == helper(str)
         
+292. Nim游戏
+你和你的朋友，两个人一起玩 Nim游戏：桌子上有一堆石头，每次你们轮流拿掉 1 - 3 块石头。 拿掉最后一块石头的人就是获胜者。你作为先手。
+
+你们是聪明人，每一步都是最优解。 编写一个函数，来判断你是否可以在给定石头数量的情况下赢得游戏。
+
+示例:
+
+输入: 4
+输出: false 
+解释: 如果堆中有 4 块石头，那么你永远不会赢得比赛；
+     因为无论你拿走 1 块、2 块 还是 3 块石头，最后一块石头总是会被你的朋友拿走。
+
+class Solution(object):
+    def canWinNim(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        return n % 4 != 0
+        
+303. 区域和检索 - 数组不可变
+给定一个整数数组  nums，求出数组从索引 i 到 j  (i ≤ j) 范围内元素的总和，包含 i,  j 两点。
+
+示例：
+
+给定 nums = [-2, 0, 3, -5, 2, -1]，求和函数为 sumRange()
+
+sumRange(0, 2) -> 1
+sumRange(2, 5) -> -1
+sumRange(0, 5) -> -3
+class NumArray(object):
+
+    def __init__(self, nums):
+        """
+        :type nums: List[int]
+        """
+        self.nums = nums
+
+    def sumRange(self, i, j):
+        """
+        :type i: int
+        :type j: int
+        :rtype: int
+        """
+        return sum(self.nums[i: j+1])
